@@ -25,4 +25,4 @@ nvidia-docker pull microsoft/cntk
 nvidia-docker pull tensorflow/tensorflow:latest-gpu-py3
 
 # obtain images built and maintained by Honghu-Tech
-nvidia-docker pull honghu/keras:latest-gpu-py3
+nvidia-docker pull honghu/keras:tf-cu9-dnn7-py3
