@@ -18,11 +18,12 @@ dpkg -i /tmp/nvidia-docker*.deb && rm /tmp/nvidia-docker*.deb
 nvidia-docker run --rm nvidia/cuda nvidia-smi
 
 # obtain some popular images
-nvidia-docker pull nvidia/cuda
-nvidia-docker pull nvidia/caffe
-nvidia-docker pull nvidia/digits
-nvidia-docker pull microsoft/cntk
-nvidia-docker pull tensorflow/tensorflow:latest-gpu-py3
+docker pull nvidia/cuda
+docker pull nvidia/caffe
+docker pull nvidia/digits
+docker pull microsoft/cntk
+docker pull tensorflow/tensorflow:latest-gpu-py3
+docker pull pytorch/pytorch
 
 # obtain images built and maintained by Honghu-Tech
 nvidia-docker pull honghu/keras:tf-cu9-dnn7-py3
