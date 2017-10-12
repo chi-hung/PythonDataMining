@@ -26,4 +26,4 @@ docker pull tensorflow/tensorflow:latest-gpu-py3
 docker pull pytorch/pytorch
 
 # obtain images built and maintained by Honghu-Tech
-nvidia-docker pull honghu/keras:tf-cu9-dnn7-py3
+docker pull honghu/keras:tf-cu9-dnn7-py3
