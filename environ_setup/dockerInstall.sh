@@ -25,7 +25,8 @@ docker pull microsoft/cntk
 docker pull tensorflow/tensorflow
 docker pull pytorch/pytorch
 
-# obtain images built and maintained by Honghu-Tech
+# obtain Keras images built and maintained by Honghu-Tech
+# further info: https://github.com/chi-hung/DockerbuildsKeras
 docker pull honghu/keras:tf-cu9-dnn7-py3
 docker pull honghu/keras:cntk-cu8-dnn6-py3
 docker pull honghu/keras:mx-cu9-dnn7-py3
