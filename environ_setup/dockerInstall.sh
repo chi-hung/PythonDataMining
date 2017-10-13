@@ -22,8 +22,10 @@ docker pull nvidia/cuda
 docker pull nvidia/caffe
 docker pull nvidia/digits
 docker pull microsoft/cntk
-docker pull tensorflow/tensorflow:latest-gpu-py3
+docker pull tensorflow/tensorflow
 docker pull pytorch/pytorch
 
 # obtain images built and maintained by Honghu-Tech
 docker pull honghu/keras:tf-cu9-dnn7-py3
+docker pull honghu/keras:cntk-cu8-dnn6-py3
+docker pull honghu/keras:mx-cu9-dnn7-py3
