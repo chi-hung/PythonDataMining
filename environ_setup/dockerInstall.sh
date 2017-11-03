@@ -21,9 +21,10 @@ nvidia-docker run --rm nvidia/cuda nvidia-smi
 docker pull nvidia/cuda
 docker pull nvidia/caffe
 docker pull nvidia/digits
-docker pull microsoft/cntk
-docker pull tensorflow/tensorflow
+#docker pull microsoft/cntk
+#docker pull tensorflow/tensorflow
 docker pull pytorch/pytorch
+docker pull caffe2ai/caffe2
 
 # obtain Keras images built and maintained by Honghu-Tech
 # further info: https://github.com/chi-hung/DockerbuildsKeras
