@@ -26,8 +26,9 @@ docker pull nvidia/digits
 docker pull pytorch/pytorch
 docker pull caffe2ai/caffe2
 
-# obtain Keras images built and maintained by Honghu-Tech
-# further info: https://github.com/chi-hung/DockerbuildsKeras
-docker pull honghu/keras:tf-cu9-dnn7-py3
+# Obtain Keras images built and maintained by Honghu-Tech.
+# Further info: https://github.com/chi-hung/DockerbuildsKeras
+docker pull honghu/keras:tf-cu9-dnn7-py3-avx2
 docker pull honghu/keras:cntk-cu8-dnn6-py3
 docker pull honghu/keras:mx-cu9-dnn7-py3
+docker pull honghu/keras:theano-cu9-dnn7-py3
