@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# ------------------------------------------------
-# This script installs Docker & NVIDIA-Docker.
-# ------------------------------------------------
+# -------------------------------------------------------------------------
+# This script installs Docker & NVIDIA-Docker and pulls some docker images.
+# -------------------------------------------------------------------------
 
 # Pre-install.
 apt-get install -y apt-transport-https ca-certificates curl software-properties-common
