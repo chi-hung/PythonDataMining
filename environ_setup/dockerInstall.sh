@@ -16,6 +16,3 @@ apt-get install -y docker-ce
 # Get and install Nvidia-Docker.
 wget -P /tmp https://github.com/NVIDIA/nvidia-docker/releases/download/v1.0.1/nvidia-docker_1.0.1-1_amd64.deb
 dpkg -i /tmp/nvidia-docker*.deb && rm /tmp/nvidia-docker*.deb
-
-# Test if nvidia-smi works from a docker container.
-nvidia-docker run --rm nvidia/cuda nvidia-smi
