@@ -1,6 +1,6 @@
 #!/bin/bash
 # ===============================================================================================
-# This script installs NVIDIA Display Driver & CUDA ToolKit & cuDNN
+# This script installs NVIDIA Driver & CUDA ToolKit & cuDNN
 #
 # maintainer: Chi-Hung Weng (wengchihung@gmail.com)
 # ===============================================================================================
@@ -27,16 +27,18 @@ CL='\033[1;32m'   # default color
 LBLUE="\033[1;34m"
 NC='\033[0m'      # no color
 
-# get the NVIDIA Display Driver installer
+# get the NVIDIA Driver installer
 if [ ! -f $nvDrvInstaller ]; then
   wget -O $nvDrvInstaller $nvDrvInstallerURL
 else
-  echo -e "${CL}INFO: NVIDIA Driver Installer downloaded.${NC}"
+  echo -e "${CL}INFO: NVIDIA Driver Installer was downloaded.${NC}"
 fi
 
-# install the NVIDIA Display Driver
+# install the NVIDIA Driver
+echo -e "${CL}INFO: Checking if NVIDIA Driver was installed...${NC}"
 cat /proc/driver/nvidia/version
 if [ $? -ne 0 ];then
+  echo -e "${CL}INFO: NVIDIA Driver was not installed...installing it Now...${NC}"
   bash $nvDrvInstaller -a --silent --no-opengl-files --dkms
   echo -e "${LBLUE}$(nvidia-smi)${NC}"
   echo -e "nvidia-smi | grep 'Driver Version' "
@@ -53,31 +55,39 @@ fi
 if [ ! -f $cudaInstaller ];then
   wget -O $cudaInstaller $cudaInstallerURL
 else
-  echo -e "${CL}INFO: CUDA Installer downloaded.${NC}"
+  echo -e "${CL}INFO: CUDA Toolkit Installer was downloaded.${NC}"
 fi
 # install CUDA Toolkit
 which /usr/local/cuda/bin/nvcc
 if [ $? -ne 0 ];then
+  echo -e "${CL}INFO: Installing CUDA Toolkit...${NC}"
   bash $cudaInstaller --no-opengl-libs --toolkit --silent # the --no-opengl-libs flag is important if it's a multi-GPU environment.
-fi
-which /usr/local/cuda/bin/nvcc
-if [ $? -ne 0 ];then
-  echo "${CL}Error! nvcc -V does not work as expected. CUDA Toolkit may NOT be installed properly!${NC}"
-  exit 1
+  # verify if CUDA Toolkit is installed
+  which /usr/local/cuda/bin/nvcc
+  if [ $? -ne 0 ];then
+    echo "${CL}Error! nvcc -V does not work as expected. CUDA Toolkit may NOT be installed properly!${NC}"
+    exit 1
+  else
+    echo -e "${LBLUE}$(/usr/local/cuda/bin/nvcc -V)${NC}"
+    echo -e "${CL}INFO: CUDA Toolkit is now installed.${NC}"
+  fi
 else
-  echo -e "${LBLUE}$(/usr/local/cuda/bin/nvcc -V)${NC}"
+  echo -e "${CL}INFO: CUDA Toolkit was installed. This script stops here and will not continue!${NC}"
+  exit 1
 fi
+
 # get CUDA Toolkit patch installer
 if [ ! -f $cudaPatchInstaller ];then
   wget -O $cudaPatchInstaller $cudaPatchInstallerURL
 else
-  echo -e "${CL}INFO: CUDA Patch Installer downloaded.${NC}"
+  echo -e "${CL}INFO: CUDA Toolkit Patch Installer was downloaded.${NC}"
 fi
 # install CUDA Toolkit Patch
+echo -e "${CL}INFO: Installing CUDA Toolkit patch...${NC}"
 bash $cudaPatchInstaller -a --silent # install CUDA 8 patch
 
 # export CUDA's PATH
-cat /etc/bash.bashrc | grep -Fxq 'export PATH=/usr/local/cuda-8.0/bin:${PATH}'
+cat /etc/bash.bashrc | grep 'export PATH=/usr/local/cuda-8.0/bin:${PATH}'
 if [ $? -ne 0 ];then
   { echo 'export PATH=/usr/local/cuda-8.0/bin:${PATH}'; cat /etc/bash.bashrc; } >/etc/bash.bashrc.new
   mv /etc/bash.bashrc{.new,}
@@ -85,7 +95,7 @@ else
   echo -e "${CL}INFO: CUDA's PATH was set in /etc/bash.bashrc${NC}"
 fi
 # export CUDA's LD_LIBRARY_PATH
-cat /etc/bash.bashrc | grep -Fxq 'export LD_LIBRARY_PATH=/usr/local/cuda-8.0/lib64:${LD_LIBRARY_PATH}'
+cat /etc/bash.bashrc | grep 'export LD_LIBRARY_PATH=/usr/local/cuda-8.0/lib64:${LD_LIBRARY_PATH}'
 if [ $? -ne 0 ];then
   { echo 'export LD_LIBRARY_PATH=/usr/local/cuda-8.0/lib64:${LD_LIBRARY_PATH}'; cat /etc/bash.bashrc; } >/etc/bash.bashrc.new
   mv /etc/bash.bashrc{.new,}
@@ -93,11 +103,25 @@ else
   echo -e "${CL}INFO: CUDA's LD_LIBRARY_PATH was set in /etc/bash.bashrc${NC}"
 fi
 
-# get cuDNN library
+# get cuDNN
 if [ ! -f $cuDNNTar ];then
 wget -O $cuDNNTar $cuDNNTarURL
 else
   echo -e "${CL}INFO: cuDNN library downloaded.${NC}"
 fi
-# extract cuDNN library
-tar -xvf $cuDNNTar -C /usr/local
+find /usr/local/cuda/lib64/ -name libcudnn*
+if [ $? -ne 0 ];then
+  # extract cuDNN
+  echo -e "${CL}INFO: Installing cuDNN...${NC}"
+  tar -xvf $cuDNNTar -C /usr/local
+  # verify if cuDNN is installed
+  find /usr/local/cuda/lib64/ -name libcudnn*
+  if [ $? -ne 0 ];then
+    echo -e "${CL}INFO: Error! Check if cudNN is installed properly.${NC}"
+  else
+    echo -e "${CL}INFO: cuDNN is now installed.${NC}"
+  fi
+else
+  echo -e "${CL}INFO: cuDNN was installed. This script stops here and will not continue!${NC}"
+  exit 1
+fi
