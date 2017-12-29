@@ -8,9 +8,13 @@
 # first, update the system to the latest state and get some basic tools
 apt-get update && apt-get -y upgrade && apt-get install -y build-essential htop vim dkms ssh
 
+
+
 # define names of the installer and where they can be retrieved
-nvDrvInstaller='NVIDIA-Linux-x86_64-384.81.run'
-nvDrvInstallerURL='http://tw.download.nvidia.com/tesla/384.81/NVIDIA-Linux-x86_64-384.81.run'
+nvDrvInstaller='NVIDIA-Linux-x86_64-384.98.run'
+#nvDrvInstallerURL='http://tw.download.nvidia.com/tesla/384.81/NVIDIA-Linux-x86_64-384.81.run'
+nvDrvInstallerURL='http://us.download.nvidia.com/XFree86/Linux-x86_64/384.98/NVIDIA-Linux-x86_64-384.98.run'
+
 
 cudaInstaller='cuda_8.0.61_375.26_linux.run'
 cudaInstallerURL='https://developer.nvidia.com/compute/cuda/8.0/Prod2/local_installers/cuda_8.0.61_375.26_linux-run'
@@ -30,23 +34,24 @@ NC='\033[0m'      # no color
 if [ ! -f $nvDrvInstaller ]; then
   wget -O $nvDrvInstaller $nvDrvInstallerURL
 else
-  echo -e "${CL}INFO: NVIDIA Display Driver Installer downloaded.${NC}"
+  echo -e "${CL}INFO: NVIDIA Driver Installer downloaded.${NC}"
 fi
 
 # install the NVIDIA Display Driver
-which nvidia-smi
+cat /proc/driver/nvidia/version
 if [ $? -ne 0 ];then
   bash $nvDrvInstaller -a --silent --no-opengl-files --dkms
+  echo -e "${LBLUE}$(nvidia-smi)${NC}"
+  echo -e "nvidia-smi | grep 'Driver Version' "
+  if [ $? -ne 0 ];then
+      echo "${CL}Error! nvidia-smi does not work as expected. The NVIDIA Driver may NOT be installed properly!${NC}"
+      exit 1
+  fi
+else
+  echo -e "${CL}INFO: NVIDIA Driver was installed. This script stops here and will not continue!${NC}"
+  exit 1
 fi
 
-# check if nvidia-smi works properly.
-echo -e "${LBLUE}$(nvidia-smi)${NC}"
-if [ $? -ne 0 ];then
-  echo "${CL}Error! nvidia-smi does not work as expected. The NVIDIA Display Driver may NOT be installed properly!${NC}"
-  exit 1
-else
-  echo -e "${CL}INFO: nvidia-smi works properly.${NC}"
-fi
 # get CUDA Toolkit installer
 if [ ! -f $cudaInstaller ];then
   wget -O $cudaInstaller $cudaInstallerURL
