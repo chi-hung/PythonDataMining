@@ -2,6 +2,8 @@
 # ===============================================================================================
 # This script installs NVIDIA Driver & CUDA ToolKit & cuDNN
 #
+# NVIDIA DRIVER 384.98, CUDA9 and CUDNN7 shall be installed after executing this script.
+#
 # maintainer: Chi-Hung Weng (wengchihung@gmail.com)
 # ===============================================================================================
 
@@ -13,13 +15,16 @@ nvDrvInstaller='NVIDIA-Linux-x86_64-384.98.run'
 #nvDrvInstallerURL='http://tw.download.nvidia.com/tesla/384.81/NVIDIA-Linux-x86_64-384.81.run'
 nvDrvInstallerURL='http://us.download.nvidia.com/XFree86/Linux-x86_64/384.98/NVIDIA-Linux-x86_64-384.98.run'
 
-cudaInstaller='cuda_8.0.61_375.26_linux.run'
-cudaInstallerURL='https://developer.nvidia.com/compute/cuda/8.0/Prod2/local_installers/cuda_8.0.61_375.26_linux-run'
+#cudaInstaller='cuda_8.0.61_375.26_linux.run'
+#cudaInstallerURL='https://developer.nvidia.com/compute/cuda/8.0/Prod2/local_installers/cuda_8.0.61_375.26_linux-run'
+cudaInstaller='cuda_9.1.85_387.26_linux.run'
+cudaInstallerURL='https://developer.nvidia.com/compute/cuda/9.1/Prod/local_installers/cuda_9.1.85_387.26_linux'
 
 cudaPatchInstaller='cuda_8.0.61.2_linux.run'
 cudaPatchInstallerURL='https://developer.nvidia.com/compute/cuda/8.0/Prod2/patches/2/cuda_8.0.61.2_linux-run'
 
-cuDNNTar="cudnn-8.0-linux-x64-v6.0.tar"
+#cuDNNTar="cudnn-8.0-linux-x64-v6.0.tar"
+cuDNNTar="cudnn-9.0-linux-x64-v7.tgz"
 cuDNNTarURL="http://honghu.wengscafe.de:35703/$cuDNNTar"
 
 # define colors which are used to display info messages
@@ -47,8 +52,8 @@ if [ $? -ne 0 ];then
       exit 1
   fi
 else
-  echo -e "${CL}INFO: NVIDIA Driver was installed. This script stops here and will not continue!${NC}"
-  exit 1
+  echo -e "${CL}INFO: NVIDIA Driver was installed!${NC}"
+  #exit 1
 fi
 
 # get CUDA Toolkit installer
@@ -72,19 +77,19 @@ if [ $? -ne 0 ];then
     echo -e "${CL}INFO: CUDA Toolkit is now installed.${NC}"
   fi
 else
-  echo -e "${CL}INFO: CUDA Toolkit was installed. This script stops here and will not continue!${NC}"
-  exit 1
+  echo -e "${CL}INFO: CUDA Toolkit was installed!${NC}"
+  #exit 1
 fi
 
-# get CUDA Toolkit patch installer
-if [ ! -f $cudaPatchInstaller ];then
-  wget -O $cudaPatchInstaller $cudaPatchInstallerURL
-else
-  echo -e "${CL}INFO: CUDA Toolkit Patch Installer was downloaded.${NC}"
-fi
-# install CUDA Toolkit Patch
-echo -e "${CL}INFO: Installing CUDA Toolkit patch...${NC}"
-bash $cudaPatchInstaller -a --silent # install CUDA 8 patch
+## get CUDA Toolkit patch installer
+#if [ ! -f $cudaPatchInstaller ];then
+#  wget -O $cudaPatchInstaller $cudaPatchInstallerURL
+#else
+#  echo -e "${CL}INFO: CUDA Toolkit Patch Installer was downloaded.${NC}"
+#fi
+## install CUDA Toolkit Patch
+#echo -e "${CL}INFO: Installing CUDA Toolkit patch...${NC}"
+#bash $cudaPatchInstaller -a --silent # install CUDA 8 patch
 
 # export CUDA's PATH
 cat /etc/bash.bashrc | grep 'export PATH=/usr/local/cuda-8.0/bin:${PATH}'
@@ -109,13 +114,13 @@ wget -O $cuDNNTar $cuDNNTarURL
 else
   echo -e "${CL}INFO: cuDNN library downloaded.${NC}"
 fi
-find /usr/local/cuda/lib64/ -name libcudnn*
+find /usr/local/cuda/lib64/ -name libcudnn* | grep -q "."
 if [ $? -ne 0 ];then
   # extract cuDNN
   echo -e "${CL}INFO: Installing cuDNN...${NC}"
   tar -xvf $cuDNNTar -C /usr/local
   # verify if cuDNN is installed
-  find /usr/local/cuda/lib64/ -name libcudnn*
+  find /usr/local/cuda/lib64/ -name libcudnn* | grep -q "."
   if [ $? -ne 0 ];then
     echo -e "${CL}INFO: Error! Check if cudNN is installed properly.${NC}"
   else
