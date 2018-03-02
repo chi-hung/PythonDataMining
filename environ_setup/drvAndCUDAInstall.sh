@@ -2,7 +2,7 @@
 # ===============================================================================================
 # This script installs NVIDIA Driver & CUDA ToolKit & cuDNN
 #
-# NVIDIA DRIVER 384.98, CUDA9 and CUDNN7 shall be installed after executing this script.
+# NVIDIA DRIVER 390.25, CUDA9 and CUDNN7 shall be installed after executing this script.
 #
 # maintainer: Chi-Hung Weng (wengchihung@gmail.com)
 # ===============================================================================================
@@ -11,17 +11,18 @@
 apt-get update && apt-get -y upgrade && apt-get install -y build-essential htop vim dkms ssh
 
 # define names of the installer and where they can be retrieved
-nvDrvInstaller='NVIDIA-Linux-x86_64-384.98.run'
+nvDrvInstaller='NVIDIA-Linux-x86_64-390.25.run'
 #nvDrvInstallerURL='http://tw.download.nvidia.com/tesla/384.81/NVIDIA-Linux-x86_64-384.81.run'
-nvDrvInstallerURL='http://us.download.nvidia.com/XFree86/Linux-x86_64/384.98/NVIDIA-Linux-x86_64-384.98.run'
+#nvDrvInstallerURL='http://us.download.nvidia.com/XFree86/Linux-x86_64/384.98/NVIDIA-Linux-x86_64-384.98.run'
+nvDrvInstallerURL='http://us.download.nvidia.com/XFree86/Linux-x86_64/390.25/NVIDIA-Linux-x86_64-390.25.run'
 
 #cudaInstaller='cuda_8.0.61_375.26_linux.run'
 #cudaInstallerURL='https://developer.nvidia.com/compute/cuda/8.0/Prod2/local_installers/cuda_8.0.61_375.26_linux-run'
 cudaInstaller='cuda_9.1.85_387.26_linux.run'
 cudaInstallerURL='https://developer.nvidia.com/compute/cuda/9.1/Prod/local_installers/cuda_9.1.85_387.26_linux'
 
-cudaPatchInstaller='cuda_8.0.61.2_linux.run'
-cudaPatchInstallerURL='https://developer.nvidia.com/compute/cuda/8.0/Prod2/patches/2/cuda_8.0.61.2_linux-run'
+#cudaPatchInstaller='cuda_8.0.61.2_linux.run'
+#cudaPatchInstallerURL='https://developer.nvidia.com/compute/cuda/8.0/Prod2/patches/2/cuda_8.0.61.2_linux-run'
 
 #cuDNNTar="cudnn-8.0-linux-x64-v6.0.tar"
 cuDNNTar="cudnn-9.0-linux-x64-v7.tgz"
