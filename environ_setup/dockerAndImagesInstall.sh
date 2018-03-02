@@ -31,7 +31,7 @@ docker pull caffe2ai/caffe2
 
 # Obtain Keras images built and maintained by me.
 # Further info: https://github.com/chi-hung/DockerbuildsKeras
-docker pull honghu/keras:tf-cu9-dnn7-py3-avx2
-docker pull honghu/keras:cntk-cu8-dnn6-py3
-docker pull honghu/keras:mx-cu9-dnn7-py3
-docker pull honghu/keras:theano-cu9-dnn7-py3
+docker pull honghu/keras:tf-cu9-dnn7-py3-avx2-18.01
+docker pull honghu/keras:cntk-cu8-dnn6-py3-18.01
+docker pull honghu/keras:mx-cu9-dnn7-py3-18.01
+docker pull honghu/keras:theano-cu9-dnn7-py3-18.01
