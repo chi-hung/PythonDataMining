@@ -92,17 +92,17 @@ fi
 #bash $cudaPatchInstaller -a --silent # install CUDA 8 patch
 
 # export CUDA's PATH
-cat /etc/bash.bashrc | grep 'export PATH=/usr/local/cuda-8.0/bin:${PATH}'
+cat /etc/bash.bashrc | grep 'export PATH=/usr/local/cuda/bin:${PATH}'
 if [ $? -ne 0 ];then
-  { echo 'export PATH=/usr/local/cuda-8.0/bin:${PATH}'; cat /etc/bash.bashrc; } >/etc/bash.bashrc.new
+  { echo 'export PATH=/usr/local/cuda/bin:${PATH}'; cat /etc/bash.bashrc; } >/etc/bash.bashrc.new
   mv /etc/bash.bashrc{.new,}
 else
   echo -e "${CL}INFO: CUDA's PATH was set in /etc/bash.bashrc${NC}"
 fi
 # export CUDA's LD_LIBRARY_PATH
-cat /etc/bash.bashrc | grep 'export LD_LIBRARY_PATH=/usr/local/cuda-8.0/lib64:${LD_LIBRARY_PATH}'
+cat /etc/bash.bashrc | grep 'export LD_LIBRARY_PATH=/usr/local/cuda/lib64:${LD_LIBRARY_PATH}'
 if [ $? -ne 0 ];then
-  { echo 'export LD_LIBRARY_PATH=/usr/local/cuda-8.0/lib64:${LD_LIBRARY_PATH}'; cat /etc/bash.bashrc; } >/etc/bash.bashrc.new
+  { echo 'export LD_LIBRARY_PATH=/usr/local/cuda/lib64:${LD_LIBRARY_PATH}'; cat /etc/bash.bashrc; } >/etc/bash.bashrc.new
   mv /etc/bash.bashrc{.new,}
 else
   echo -e "${CL}INFO: CUDA's LD_LIBRARY_PATH was set in /etc/bash.bashrc${NC}"
