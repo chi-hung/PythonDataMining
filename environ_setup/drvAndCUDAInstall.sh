@@ -11,11 +11,12 @@
 apt-get update && apt-get -y upgrade && apt-get install -y build-essential htop vim dkms ssh
 
 # define names of the installer and where they can be retrieved
-nvDrvInstaller='NVIDIA-Linux-x86_64-390.25.run'
+#nvDrvInstaller='NVIDIA-Linux-x86_64-390.25.run'
+nvDrvInstaller='NVIDIA-Linux-x86_64-390.30.run'
 #nvDrvInstallerURL='http://tw.download.nvidia.com/tesla/384.81/NVIDIA-Linux-x86_64-384.81.run'
 #nvDrvInstallerURL='http://us.download.nvidia.com/XFree86/Linux-x86_64/384.98/NVIDIA-Linux-x86_64-384.98.run'
-nvDrvInstallerURL='http://us.download.nvidia.com/XFree86/Linux-x86_64/390.25/NVIDIA-Linux-x86_64-390.25.run'
-
+#nvDrvInstallerURL='http://us.download.nvidia.com/XFree86/Linux-x86_64/390.25/NVIDIA-Linux-x86_64-390.25.run'
+nvDrvInstallerURL='http://us.download.nvidia.com/tesla/390.30/NVIDIA-Linux-x86_64-390.30.run'
 #cudaInstaller='cuda_8.0.61_375.26_linux.run'
 #cudaInstallerURL='https://developer.nvidia.com/compute/cuda/8.0/Prod2/local_installers/cuda_8.0.61_375.26_linux-run'
 cudaInstaller='cuda_9.1.85_387.26_linux.run'

@@ -21,7 +21,8 @@ dpkg -i /tmp/nvidia-docker*.deb && rm /tmp/nvidia-docker*.deb
 nvidia-docker run --rm nvidia/cuda nvidia-smi
 
 # obtain some popular images
-docker pull nvidia/cuda
+#docker pull nvidia/cuda
+nvidia/cuda:9.1-cudnn7-devel-ubuntu16.04
 docker pull nvidia/caffe
 docker pull nvidia/digits
 docker pull pytorch/pytorch
