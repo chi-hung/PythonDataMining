@@ -10,7 +10,7 @@
 # First of all, update the OS and get some essential stuffs
 apt-get update && apt-get -y upgrade && apt-get install -y build-essential htop vim dkms ssh
 
-# =====================================
+# ===============================================================================================
 # Here's a field for the NVIDIA Driver's URL
 #nvDrvInstallerURL='http://tw.download.nvidia.com/tesla/384.81/NVIDIA-Linux-x86_64-384.81.run'
 #nvDrvInstallerURL='http://us.download.nvidia.com/XFree86/Linux-x86_64/384.98/NVIDIA-Linux-x86_64-384.98.run'
@@ -18,9 +18,9 @@ apt-get update && apt-get -y upgrade && apt-get install -y build-essential htop 
 #nvDrvInstallerURL='http://us.download.nvidia.com/XFree86/Linux-x86_64/390.25/NVIDIA-Linux-x86_64-390.25.run'
 nvDrvInstaller='NVIDIA-Linux-x86_64-390.30.run'
 nvDrvInstallerURL='http://us.download.nvidia.com/tesla/390.30/NVIDIA-Linux-x86_64-390.30.run'
-# =====================================
+# ===============================================================================================
 
-# =====================================
+# ===============================================================================================
 # Here's a field for the NVIDIA CUDA's URL
 #cudaInstaller='cuda_8.0.61_375.26_linux.run'
 #cudaInstallerURL='https://developer.nvidia.com/compute/cuda/8.0/Prod2/local_installers/cuda_8.0.61_375.26_linux-run'
@@ -28,14 +28,14 @@ cudaInstaller='cuda_9.1.85_387.26_linux.run'
 cudaInstallerURL='https://developer.nvidia.com/compute/cuda/9.1/Prod/local_installers/cuda_9.1.85_387.26_linux'
 #cudaPatchInstaller='cuda_8.0.61.2_linux.run'
 #cudaPatchInstallerURL='https://developer.nvidia.com/compute/cuda/8.0/Prod2/patches/2/cuda_8.0.61.2_linux-run'
-# =====================================
+# ===============================================================================================
 
-# =====================================
+# ===============================================================================================
 # Here's a field for the NVIDIA cuDNN's URL
 #cuDNNTar="cudnn-8.0-linux-x64-v6.0.tar"
 cuDNNTar="cudnn-9.0-linux-x64-v7.tgz"
 cuDNNTarURL="http://honghu.wengscafe.de:35703/$cuDNNTar"
-# =====================================
+# ===============================================================================================
 # Define colors which are used to display info messages
 CL='\033[1;32m'   # default color
 LBLUE="\033[1;34m"
